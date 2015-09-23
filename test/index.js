@@ -18,6 +18,7 @@ describe('im()', function () {
     img.pipe(fs.createWriteStream(__dirname + '/test-resized.jpg'));
     img.on('finish', function () {
       assert(fs.existsSync(__dirname + '/test-resized.jpg'));
+      assert(fs.statSync(__dirname + '/test-resized.jpg')['size'] > 0);
       fs.unlinkSync(__dirname + '/test-resized.jpg');
       done();
     });
@@ -39,6 +40,7 @@ describe('im()', function () {
       img.pipe(fs.createWriteStream(__dirname + '/test-resized.jpg'));
       img.on('finish', function () {
         assert(fs.existsSync(__dirname + '/test-resized.jpg'));
+        assert(fs.statSync(__dirname + '/test-resized.jpg')['size'] > 0);
         fs.unlinkSync(__dirname + '/test-resized.jpg');
         done();
       });
@@ -51,6 +53,7 @@ describe('im()', function () {
       fs.createReadStream(__dirname + '/test.jpg').pipe(img);
       img.on('finish', function () {
         assert(fs.existsSync(__dirname + '/test-resized.jpg'));
+        assert(fs.statSync(__dirname + '/test-resized.jpg')['size'] > 0);
         fs.unlinkSync(__dirname + '/test-resized.jpg');
         done();
       });
